@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2612718-F064-43FD-9E62-25A560F5A3AD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>QuakeMapGenerator</RootNamespace>
+    <AssemblyName>QuakeMapGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CoreTweet, Version=1.0.0.483, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoreTweet.1.0.0.483\lib\net45\CoreTweet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Json.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JapanMap2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JapanMap2_Replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JapanMap1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JapanMap1_Replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo53.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo61.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo62.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo63.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo71.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo73.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo81.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo82.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo83.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo91.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo92.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo93.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapShindo13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\world2.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
