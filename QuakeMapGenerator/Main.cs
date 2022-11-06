@@ -1297,7 +1297,7 @@ namespace QuakeMapGenerator
                     {
                         string sMessage = RemoteTalkText;
                         byte bCode = 0;
-                        Int16 iVoice = 1;
+                        Int16 iVoice = 2;
                         Int16 iVolume = 100;
                         Int16 iSpeed = 100;
                         Int16 iTone = 150;
