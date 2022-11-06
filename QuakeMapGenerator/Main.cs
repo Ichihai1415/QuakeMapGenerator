@@ -99,52 +99,30 @@ namespace QuakeMapGenerator
                             AreaDic.Add(P2PQuake_json[0].Points[x].Addr, P2PQuake_json[0].Points[x].Scale);
 
                             if (P2PQuake_json[0].Points[x].Scale == 10)
-                            {
                                 Area_Sindo1.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 20)
-                            {
                                 Area_Sindo2.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 30)
-                            {
                                 Area_Sindo3.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 40)
-                            {
                                 Area_Sindo4.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 45)
-                            {
                                 Area_Sindo5.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 50)
-                            {
                                 Area_Sindo6.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 55)
-                            {
                                 Area_Sindo7.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 60)
-                            {
                                 Area_Sindo8.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 70)
-                            {
                                 Area_Sindo9.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                             else if (P2PQuake_json[0].Points[x].Scale == 46)
-                            {
                                 Area_SindoNull.Add(P2PQuake_json[0].Points[x].Addr);
-                            }
                         }
                         Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "　震度別分配終了");
                         string Area = "";
                         foreach (string Area_ in AreaDic.Keys)
-                        {
                             Area += Area_;
-                        }
                         string AreaAll = "";
                         double PointXMin = 9999;
                         double PointXMax = 0;
@@ -163,21 +141,13 @@ namespace QuakeMapGenerator
                                 ShindoImage2.DrawImage(Resources.MapShindo32, imagex, imagey);
                                 Area3 += " " + Area_Sindo3[x];
                                 if (imagex - 40 < PointXMin)
-                                {
                                     PointXMin = imagex - 40;
-                                }
                                 if (imagex + 60 > PointXMax)
-                                {
                                     PointXMax = imagex + 60;
-                                }
                                 if (imagey - 40 < PointYMin)
-                                {
                                     PointYMin = imagey - 40;
-                                }
                                 if (imagey + 60 > PointYMax)
-                                {
                                     PointYMax = imagey + 60;
-                                }
                             }
                             AreaAll = Area3 + "\n" + AreaAll;
                             MaxInt = "3";
@@ -194,21 +164,13 @@ namespace QuakeMapGenerator
                                     ShindoImage2.DrawImage(Resources.MapShindo42, imagex, imagey);
                                     Area4 += " " + Area_Sindo4[x];
                                     if (imagex - 40 < PointXMin)
-                                    {
                                         PointXMin = imagex - 40;
-                                    }
                                     if (imagex + 60 > PointXMax)
-                                    {
                                         PointXMax = imagex + 60;
-                                    }
                                     if (imagey - 40 < PointYMin)
-                                    {
                                         PointYMin = imagey - 40;
-                                    }
                                     if (imagey + 60 > PointYMax)
-                                    {
                                         PointYMax = imagey + 60;
-                                    }
                                 }
                                 AreaAll = Area4 + "\n" + AreaAll;
                                 MaxInt = "4";
@@ -225,21 +187,13 @@ namespace QuakeMapGenerator
                                         ShindoImage2.DrawImage(Resources.MapShindo52, imagex, imagey);
                                         Area5 += " " + Area_Sindo5[x];
                                         if (imagex - 40 < PointXMin)
-                                        {
                                             PointXMin = imagex - 40;
-                                        }
                                         if (imagex + 60 > PointXMax)
-                                        {
                                             PointXMax = imagex + 60;
-                                        }
                                         if (imagey - 40 < PointYMin)
-                                        {
                                             PointYMin = imagey - 40;
-                                        }
                                         if (imagey + 60 > PointYMax)
-                                        {
                                             PointYMax = imagey + 60;
-                                        }
                                     }
                                     AreaAll = Area5 + "\n" + AreaAll;
                                     MaxInt = "5弱";
@@ -256,21 +210,13 @@ namespace QuakeMapGenerator
                                             ShindoImage2.DrawImage(Resources.MapShindo62, imagex, imagey);
                                             Area6 += " " + Area_Sindo6[x];
                                             if (imagex - 40 < PointXMin)
-                                            {
                                                 PointXMin = imagex - 40;
-                                            }
                                             if (imagex + 60 > PointXMax)
-                                            {
                                                 PointXMax = imagex + 60;
-                                            }
                                             if (imagey - 40 < PointYMin)
-                                            {
                                                 PointYMin = imagey - 40;
-                                            }
                                             if (imagey + 60 > PointYMax)
-                                            {
                                                 PointYMax = imagey + 60;
-                                            }
                                         }
                                         AreaAll = Area6 + "\n" + AreaAll;
                                         MaxInt = "5強";
@@ -287,21 +233,13 @@ namespace QuakeMapGenerator
                                                 ShindoImage2.DrawImage(Resources.MapShindo72, imagex, imagey);
                                                 Area7 += " " + Area_Sindo7[x];
                                                 if (imagex - 40 < PointXMin)
-                                                {
                                                     PointXMin = imagex - 40;
-                                                }
                                                 if (imagex + 60 > PointXMax)
-                                                {
                                                     PointXMax = imagex + 60;
-                                                }
                                                 if (imagey - 40 < PointYMin)
-                                                {
                                                     PointYMin = imagey - 40;
-                                                }
                                                 if (imagey + 60 > PointYMax)
-                                                {
                                                     PointYMax = imagey + 60;
-                                                }
                                             }
                                             AreaAll = Area7 + "\n" + AreaAll;
                                             MaxInt = "6弱";
@@ -318,21 +256,13 @@ namespace QuakeMapGenerator
                                                     ShindoImage2.DrawImage(Resources.MapShindo82, imagex, imagey);
                                                     Area8 += " " + Area_Sindo8[x];
                                                     if (imagex - 40 < PointXMin)
-                                                    {
                                                         PointXMin = imagex - 40;
-                                                    }
                                                     if (imagex + 60 > PointXMax)
-                                                    {
                                                         PointXMax = imagex + 60;
-                                                    }
                                                     if (imagey - 40 < PointYMin)
-                                                    {
                                                         PointYMin = imagey - 40;
-                                                    }
                                                     if (imagey + 60 > PointYMax)
-                                                    {
                                                         PointYMax = imagey + 60;
-                                                    }
                                                 }
                                                 AreaAll = Area8 + "\n" + AreaAll;
                                                 MaxInt = "6強";
@@ -349,21 +279,13 @@ namespace QuakeMapGenerator
                                                         ShindoImage2.DrawImage(Resources.MapShindo92, imagex, imagey);
                                                         Area9 += " " + Area_Sindo9[x];
                                                         if (imagex - 40 < PointXMin)
-                                                        {
                                                             PointXMin = imagex - 40;
-                                                        }
                                                         if (imagex + 60 > PointXMax)
-                                                        {
                                                             PointXMax = imagex + 60;
-                                                        }
                                                         if (imagey - 40 < PointYMin)
-                                                        {
                                                             PointYMin = imagey - 40;
-                                                        }
                                                         if (imagey + 60 > PointYMax)
-                                                        {
                                                             PointYMax = imagey + 60;
-                                                        }
                                                     }
                                                     AreaAll = Area9 + "\n" + AreaAll;
                                                     MaxInt = "7";
@@ -382,26 +304,18 @@ namespace QuakeMapGenerator
                         double MagnificationY = 1 / ((PointYMax - PointYMin) / 480);
                         double Magnification = MagnificationX;
                         if (MagnificationX < MagnificationY)
-                        {
                             Magnification = MagnificationY;
-                        }
                         if (Magnification > 2)
-                        {
                             Magnification = 2;
-                        }
                         if (P2PQuake_json[1].Issue.Type == "Destination" && P2PQuake_json[0].Earthquake.Time == P2PQuake_json[1].Earthquake.Time)
                         {
                             double MagnificationX_ = (PointXMax - PointXMin) / 720;
                             double MagnificationY_ = (PointYMax - PointYMin) / 480;
                             double Magnification_ = MagnificationX_;
                             if (MagnificationX_ > MagnificationY_)
-                            {
                                 Magnification_ = MagnificationY_;
-                            }
                             if (Magnification_ < 0.5)
-                            {
                                 Magnification_ = 0.5;
-                            }
                             int Ssize = (int)(50 * Magnification_);
                             int Ssize2 = Ssize / 2;
                             int Simagex = (int)((P2PQuake_json[1].Earthquake.Hypocenter.Longitude - 115) * 88.88888) - Ssize2;
@@ -416,13 +330,9 @@ namespace QuakeMapGenerator
                             double MagnificationY_ = (PointYMax - PointYMin) / 480;
                             double Magnification_ = MagnificationX_;
                             if (MagnificationX_ > MagnificationY_)
-                            {
                                 Magnification_ = MagnificationY_;
-                            }
                             if (Magnification_ < 0.5)
-                            {
                                 Magnification_ = 0.5;
-                            }
                             int Ssize = (int)(50 * Magnification_);
                             int Ssize2 = Ssize / 2;
                             int Simagex = (int)((P2PQuake_json[2].Earthquake.Hypocenter.Longitude - 115) * 88.88888) - Ssize2;
@@ -437,13 +347,9 @@ namespace QuakeMapGenerator
                             double MagnificationY_ = (PointYMax - PointYMin) / 480;
                             double Magnification_ = MagnificationX_;
                             if (MagnificationX_ > MagnificationY_)
-                            {
                                 Magnification_ = MagnificationY_;
-                            }
                             if (Magnification_ < 0.5)
-                            {
                                 Magnification_ = 0.5;
-                            }
                             int Ssize = (int)(50 * Magnification_);
                             int Ssize2 = Ssize / 2;
                             int Simagex = (int)((P2PQuake_json[3].Earthquake.Hypocenter.Longitude - 115) * 88.88888) - Ssize2;
@@ -474,10 +380,9 @@ namespace QuakeMapGenerator
                         AreaTextBox.Text = AreaAll;
 
                         RemoteTalkText = ("震度速報、" + AreaAll).Replace(" ", "、").Replace("《", "、").Replace("》", "").Replace("\n", "").Replace("、、", "、");
-                        long NowTime = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                        //long InfoTime = Convert.ToInt64(P2PQuake_json[0].Created_at.Replace(":", "").Replace("/", "").Replace(" ", "").Remove(14, 4));
-                        long InfoTime = Convert.ToInt64(P2PQuake_json[0].Time.Replace(":", "").Replace("/", "").Replace(" ", "").Remove(14, 4));
-                        if (NowTime - InfoTime <= 600 && AreaAll != LatestArea)
+                        DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
+                        DateTime NowTime = DateTime.Now;
+                        if ((NowTime - InfoTime).TotalDays <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
                         {
                             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                             string tokens_json = File.ReadAllText($"Tokens.json");
@@ -485,9 +390,7 @@ namespace QuakeMapGenerator
                             Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                             string TweetText = $"震度速報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n{AreaAll}";
                             if (TweetText.Length > 120)
-                            {
                                 TweetText = TweetText.Remove(120, TweetText.Length - 120) + "…";
-                            }
                             if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                             {
                                 Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
@@ -536,52 +439,30 @@ namespace QuakeMapGenerator
                                 AreaDic.Add(P2PQuake_json[1].Points[x].Addr, P2PQuake_json[1].Points[x].Scale);
 
                                 if (P2PQuake_json[1].Points[x].Scale == 10)
-                                {
                                     Area_Sindo1.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 20)
-                                {
                                     Area_Sindo2.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 30)
-                                {
                                     Area_Sindo3.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 40)
-                                {
                                     Area_Sindo4.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 45)
-                                {
                                     Area_Sindo5.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 50)
-                                {
                                     Area_Sindo6.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 55)
-                                {
                                     Area_Sindo7.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 60)
-                                {
                                     Area_Sindo8.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 70)
-                                {
                                     Area_Sindo9.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                                 else if (P2PQuake_json[1].Points[x].Scale == 46)
-                                {
                                     Area_SindoNull.Add(P2PQuake_json[1].Points[x].Addr);
-                                }
                             }
                             Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "　震度別分配終了");
                             string Area = "";
                             foreach (string Area_ in AreaDic.Keys)
-                            {
                                 Area += Area_;
-                            }
                             string AreaAll = "";
                             double PointXMin = 9999;
                             double PointXMax = 0;
@@ -598,21 +479,13 @@ namespace QuakeMapGenerator
                                 ShindoImage2.DrawImage(Resources.MapShindo32, imagex, imagey);
                                 Area3 += " " + Area_Sindo3[x];
                                 if (imagex - 40 < PointXMin)
-                                {
                                     PointXMin = imagex - 40;
-                                }
                                 if (imagex + 60 > PointXMax)
-                                {
                                     PointXMax = imagex + 60;
-                                }
                                 if (imagey - 40 < PointYMin)
-                                {
                                     PointYMin = imagey - 40;
-                                }
                                 if (imagey + 60 > PointYMax)
-                                {
                                     PointYMax = imagey + 60;
-                                }
                             }
                             AreaAll = Area3 + "\n" + AreaAll;
                             if (P2PQuake_json[1].Earthquake.MaxScale >= 40)
@@ -625,21 +498,13 @@ namespace QuakeMapGenerator
                                     ShindoImage2.DrawImage(Resources.MapShindo42, imagex, imagey);
                                     Area4 += " " + Area_Sindo4[x];
                                     if (imagex - 40 < PointXMin)
-                                    {
                                         PointXMin = imagex - 40;
-                                    }
                                     if (imagex + 60 > PointXMax)
-                                    {
                                         PointXMax = imagex + 60;
-                                    }
                                     if (imagey - 40 < PointYMin)
-                                    {
                                         PointYMin = imagey - 40;
-                                    }
                                     if (imagey + 60 > PointYMax)
-                                    {
                                         PointYMax = imagey + 60;
-                                    }
                                 }
                                 AreaAll = Area4 + "\n" + AreaAll;
                                 if (P2PQuake_json[1].Earthquake.MaxScale >= 45)
@@ -652,21 +517,13 @@ namespace QuakeMapGenerator
                                         ShindoImage2.DrawImage(Resources.MapShindo52, imagex, imagey);
                                         Area5 += " " + Area_Sindo5[x];
                                         if (imagex - 40 < PointXMin)
-                                        {
                                             PointXMin = imagex - 40;
-                                        }
                                         if (imagex + 60 > PointXMax)
-                                        {
                                             PointXMax = imagex + 60;
-                                        }
                                         if (imagey - 40 < PointYMin)
-                                        {
                                             PointYMin = imagey - 40;
-                                        }
                                         if (imagey + 60 > PointYMax)
-                                        {
                                             PointYMax = imagey + 60;
-                                        }
                                     }
                                     AreaAll = Area5 + "\n" + AreaAll;
                                     if (P2PQuake_json[1].Earthquake.MaxScale >= 50)
@@ -679,21 +536,13 @@ namespace QuakeMapGenerator
                                             ShindoImage2.DrawImage(Resources.MapShindo62, imagex, imagey);
                                             Area6 += " " + Area_Sindo6[x];
                                             if (imagex - 40 < PointXMin)
-                                            {
                                                 PointXMin = imagex - 40;
-                                            }
                                             if (imagex + 60 > PointXMax)
-                                            {
                                                 PointXMax = imagex + 60;
-                                            }
                                             if (imagey - 40 < PointYMin)
-                                            {
                                                 PointYMin = imagey - 40;
-                                            }
                                             if (imagey + 60 > PointYMax)
-                                            {
                                                 PointYMax = imagey + 60;
-                                            }
                                         }
                                         AreaAll = Area6 + "\n" + AreaAll;
                                         if (P2PQuake_json[1].Earthquake.MaxScale >= 55)
@@ -706,21 +555,13 @@ namespace QuakeMapGenerator
                                                 ShindoImage2.DrawImage(Resources.MapShindo72, imagex, imagey);
                                                 Area7 += " " + Area_Sindo7[x];
                                                 if (imagex - 40 < PointXMin)
-                                                {
                                                     PointXMin = imagex - 40;
-                                                }
                                                 if (imagex + 60 > PointXMax)
-                                                {
                                                     PointXMax = imagex + 60;
-                                                }
                                                 if (imagey - 40 < PointYMin)
-                                                {
                                                     PointYMin = imagey - 40;
-                                                }
                                                 if (imagey + 60 > PointYMax)
-                                                {
                                                     PointYMax = imagey + 60;
-                                                }
                                             }
                                             AreaAll = Area7 + "\n" + AreaAll;
                                             if (P2PQuake_json[1].Earthquake.MaxScale >= 60)
@@ -734,21 +575,13 @@ namespace QuakeMapGenerator
                                                     Console.WriteLine($"x{imagex}y{imagey}");
                                                     Area8 += " " + Area_Sindo8[x];
                                                     if (imagex - 40 < PointXMin)
-                                                    {
                                                         PointXMin = imagex - 40;
-                                                    }
                                                     if (imagex + 60 > PointXMax)
-                                                    {
                                                         PointXMax = imagex + 60;
-                                                    }
                                                     if (imagey - 40 < PointYMin)
-                                                    {
                                                         PointYMin = imagey - 40;
-                                                    }
                                                     if (imagey + 60 > PointYMax)
-                                                    {
                                                         PointYMax = imagey + 60;
-                                                    }
                                                 }
                                                 AreaAll = Area8 + "\n" + AreaAll;
                                                 if (P2PQuake_json[1].Earthquake.MaxScale >= 70)
@@ -761,21 +594,13 @@ namespace QuakeMapGenerator
                                                         ShindoImage2.DrawImage(Resources.MapShindo92, imagex, imagey);
                                                         Area9 += " " + Area_Sindo9[x];
                                                         if (imagex - 40 < PointXMin)
-                                                        {
                                                             PointXMin = imagex - 40;
-                                                        }
                                                         if (imagex + 60 > PointXMax)
-                                                        {
                                                             PointXMax = imagex + 60;
-                                                        }
                                                         if (imagey - 40 < PointYMin)
-                                                        {
                                                             PointYMin = imagey - 40;
-                                                        }
                                                         if (imagey + 60 > PointYMax)
-                                                        {
                                                             PointYMax = imagey + 60;
-                                                        }
                                                     }
                                                     AreaAll = Area9 + "\n" + AreaAll;
                                                 }
@@ -795,21 +620,13 @@ namespace QuakeMapGenerator
                             double Magnification = MagnificationX;
                             double Magnification_ = MagnificationX_;
                             if (MagnificationX > MagnificationY)
-                            {
                                 Magnification = MagnificationY;
-                            }
                             if (Magnification > 2)
-                            {
                                 Magnification = 2;
-                            }
                             if (MagnificationX_ > MagnificationY_)
-                            {
                                 Magnification_ = MagnificationY_;
-                            }
                             if (Magnification_ < 0.5)
-                            {
                                 Magnification_ = 0.5;
-                            }
                             int Ssize = (int)(50 * Magnification_);
                             int Ssize2 = Ssize / 2;
                             int Simagex = (int)((P2PQuake_json[0].Earthquake.Hypocenter.Longitude - 115) * 88.88888) - Ssize2;
@@ -837,9 +654,9 @@ namespace QuakeMapGenerator
                             AreaTextBox.Text = AreaAll;
 
                             RemoteTalkText = ($"震源情報、震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報を発表中です。")}");
-                            long InfoTime = Convert.ToInt64(P2PQuake_json[0].Time.Replace(":", "").Replace("/", "").Replace(" ", "").Remove(14, 4));
-                            long NowTime = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                            if (NowTime - InfoTime <= 600)
+                            DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
+                            DateTime NowTime = DateTime.Now;
+                            if ((NowTime - InfoTime).TotalDays <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
                             {
                                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                                 string tokens_json = File.ReadAllText($"Tokens.json");
@@ -923,9 +740,7 @@ namespace QuakeMapGenerator
                         for (int x = 0; x < P2PQuake_json[0].Points.Count; x++)
                         {
                             if (PrefShindo[P2PQuake_json[0].Points[x].Pref] < P2PQuake_json[0].Points[x].Scale)
-                            {
                                 PrefShindo[P2PQuake_json[0].Points[x].Pref] = P2PQuake_json[0].Points[x].Scale;
-                            }
                         }
                         Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "　県別最大震度完了");
 
@@ -1034,51 +849,29 @@ namespace QuakeMapGenerator
                         }
                         bool FileFlag = false;
                         for (int i = 0; i < 47; i++)
-                        {
                             ColorChange[i].NewColor = Color.FromArgb(90, 90, 120);
-                        }
                         for (int p = 0; p < P2PQuake_json[0].Points.Count; p++)
                         {
                             if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 10)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(70, 100, 110);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 20)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(30, 110, 230);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 30)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(0, 200, 200);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 40)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(250, 250, 100);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 45)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(255, 180, 0);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 50)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(255, 120, 0);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 55)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(230, 0, 0);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 60)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(160, 0, 0);
-                            }
                             else if (PrefShindo[P2PQuake_json[0].Points[p].Pref] == 70)
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(150, 0, 150);
-                            }
                             else
-                            {
                                 ColorChange[PrefID[P2PQuake_json[0].Points[p].Pref]].NewColor = Color.FromArgb(90, 90, 120);
-                            }
                             if (P2PQuake_json[0].Points[p].Pref == Settings.Default.FilePref)
                             {
                                 FileFlag = true;
@@ -1108,45 +901,25 @@ namespace QuakeMapGenerator
                         Graphics.Dispose();
                         MapImage.Dispose();
                         if (P2PQuake_json[0].Earthquake.MaxScale == 10)
-                        {
                             MaxInt = "1";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 20)
-                        {
                             MaxInt = "2";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 30)
-                        {
                             MaxInt = "3";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 40)
-                        {
                             MaxInt = "4";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 45)
-                        {
                             MaxInt = "5弱";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 50)
-                        {
                             MaxInt = "5強";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 55)
-                        {
                             MaxInt = "6弱";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 60)
-                        {
                             MaxInt = "6強";
-                        }
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 70)
-                        {
                             MaxInt = "7";
-                        }
                         if (FileFlag == true)
-                        {
                             FileOpen.Enabled = true;
-                        }
                         RemoteTalkText = ($"地震情報。最大震度{MaxInt}、震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}");
                         DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
                         DateTime NowTime = DateTime.Now;
@@ -1183,9 +956,9 @@ namespace QuakeMapGenerator
                         Map.Location = new System.Drawing.Point(LocX * -1 + 360, 0);
                         Map.BackgroundImage = MapImage;
                         RemoteTalkText = $"遠地地震情報。震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9")}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}".Replace("、マグニチュード-1.0", "").Replace("、深さ-1キロメートル", "");
-                        long InfoTime = Convert.ToInt64(P2PQuake_json[0].Time.Replace(":", "").Replace("/", "").Replace(" ", "").Remove(14, 4));
-                        long NowTime = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                        if (NowTime - InfoTime <= 600)
+                        DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
+                        DateTime NowTime = DateTime.Now;
+                        if ((NowTime - InfoTime).TotalDays <= 1)
                         {
                             double Lat = P2PQuake_json[0].Earthquake.Hypocenter.Latitude;
                             double Long = P2PQuake_json[0].Earthquake.Hypocenter.Longitude;
@@ -1200,7 +973,7 @@ namespace QuakeMapGenerator
                             Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                             Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                             string TweetText = $"遠地地震情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}({LatSt}、{LongSt})\nM{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9").Replace("M-1.0", "M不明")} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い").Replace("深さ-1km", "深さ不明")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                            tokens.Statuses.Update(new { status = TweetText});
+                            tokens.Statuses.Update(new { status = TweetText });
                         }
                     }
                     else
