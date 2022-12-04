@@ -391,15 +391,22 @@ namespace QuakeMapGenerator
                             string TweetText = $"震度速報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n{AreaAll}";
                             if (TweetText.Length > 120)
                                 TweetText = TweetText.Remove(120, TweetText.Length - 120) + "…";
-                            if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                            try
                             {
-                                Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                LatestTweetID = status.Id;
+                                if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                {
+                                    Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
+                                    LatestTweetID = status.Id;
+                                }
+                                else
+                                {
+                                    Status status = tokens.Statuses.Update(new { status = TweetText });
+                                    LatestTweetID = status.Id;
+                                }
                             }
-                            else
+                            catch
                             {
-                                Status status = tokens.Statuses.Update(new { status = TweetText });
-                                LatestTweetID = status.Id;
+
                             }
                             LatestArea = AreaAll;
                             LatestTime = P2PQuake_json[0].Earthquake.Time;
@@ -656,23 +663,31 @@ namespace QuakeMapGenerator
                             RemoteTalkText = ($"震源情報、震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報を発表中です。")}");
                             DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
                             DateTime NowTime = DateTime.Now;
-                            if ((NowTime - InfoTime).TotalDays <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
+                            if ((NowTime - InfoTime).TotalHours <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
                             {
                                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                                 string tokens_json = File.ReadAllText($"Tokens.json");
                                 Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                                 Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                                 string TweetText = $"震源に関する情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                                if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                try
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                    LatestTweetID = status.Id;
+                                    if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                    {
+                                        Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
+                                        LatestTweetID = status.Id;
+                                    }
+                                    else
+                                    {
+                                        Status status = tokens.Statuses.Update(new { status = TweetText });
+                                        LatestTweetID = status.Id;
+                                    }
                                 }
-                                else
+                                catch
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText });
-                                    LatestTweetID = status.Id;
+
                                 }
+                                
                                 LatestTime = P2PQuake_json[0].Earthquake.Time;
                             }
 
@@ -923,23 +938,32 @@ namespace QuakeMapGenerator
                         RemoteTalkText = ($"地震情報。最大震度{MaxInt}、震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}");
                         DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
                         DateTime NowTime = DateTime.Now;
-                        if ((NowTime - InfoTime).TotalDays <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
+                        if ((NowTime - InfoTime).TotalHours <= 1 && P2PQuake_json[0].Earthquake.MaxScale >= 30)
                         {
+
                             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                             string tokens_json = File.ReadAllText($"Tokens.json");
                             Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                             Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                             string TweetText = $"各地の震度に関する情報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                            if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                            try
                             {
-                                Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                LatestTweetID = status.Id;
+                                if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                {
+                                    Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
+                                    LatestTweetID = status.Id;
+                                }
+                                else
+                                {
+                                    Status status = tokens.Statuses.Update(new { status = TweetText });
+                                    LatestTweetID = status.Id;
+                                }
                             }
-                            else
+                            catch
                             {
-                                Status status = tokens.Statuses.Update(new { status = TweetText });
-                                LatestTweetID = status.Id;
+
                             }
+                            
                             LatestTime = P2PQuake_json[0].Earthquake.Time;
                         }
                     }
@@ -947,13 +971,20 @@ namespace QuakeMapGenerator
                     {
                         Map.Image = null;
                         Map.BackgroundImage = null;
-                        Map.Size = new Size(960, 480);
-                        Bitmap MapImage = new Bitmap(Resources.world);
+                        Map.Size = new Size(1226, 480);//余白左右133
+                        Bitmap MapImage = new Bitmap(Resources.WorldMap);
                         Graphics Graphics = Graphics.FromImage(MapImage);
-                        int LocX = (int)(P2PQuake_json[0].Earthquake.Hypocenter.Longitude + 180) * 5;
-                        int LocY = (int)(-P2PQuake_json[0].Earthquake.Hypocenter.Latitude + 90) * 5;
-                        Graphics.DrawImage(Resources.Point, LocX - 25, LocY - 25, 50, 50);
-                        Map.Location = new System.Drawing.Point(LocX * -1 + 360, 0);
+
+                        int LocX = (int)Math.Round((P2PQuake_json[0].Earthquake.Hypocenter.Longitude + 180) * 2.6666666666 + 133,MidpointRounding.AwayFromZero);
+                        int LocY = (int)Math.Round((90 - P2PQuake_json[0].Earthquake.Hypocenter.Latitude) *2.6666666666, MidpointRounding.AwayFromZero);
+                        Graphics.DrawImage(Resources.Point, LocX - 20, LocY - 20, 40, 40);
+                        int LocX_ = LocX * -1 + 360;
+                        if (LocX_ > 0)
+                            LocX_ = 0;
+                        else if (LocX_ < -506)
+                            LocX_ = -506;
+
+                        Map.Location = new System.Drawing.Point(LocX_, 0);
                         Map.BackgroundImage = MapImage;
                         RemoteTalkText = $"遠地地震情報。震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9")}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}".Replace("、マグニチュード-1.0", "").Replace("、深さ-1キロメートル", "");
                         DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
@@ -972,8 +1003,20 @@ namespace QuakeMapGenerator
                             string tokens_json = File.ReadAllText($"Tokens.json");
                             Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                             Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
-                            string TweetText = $"遠地地震情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}({LatSt}、{LongSt})\nM{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9").Replace("M-1.0", "M不明")} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い").Replace("深さ-1km", "深さ不明")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                            tokens.Statuses.Update(new { status = TweetText });
+                            string TweetText = $"遠地地震情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}({LatSt}、{LongSt})\nM{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9").Replace("-1.0", "不明")} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い").Replace("深さ-1km", "深さ不明")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
+                            if (P2PQuake_json[0].Earthquake.Hypocenter.Magnitude == -1)
+                            {
+                                TweetText = TweetText.Replace("遠地地震情報", "遠地地震情報(大規模な火山噴火)");
+                                RemoteTalkText= RemoteTalkText.Replace("遠地地震情報", "遠地地震情報、大規模な火山噴火");
+                            }
+                            try
+                            {
+                                tokens.Statuses.Update(new { status = TweetText });
+                            }
+                            catch
+                            {
+
+                            }
                         }
                     }
                     else
@@ -1258,7 +1301,7 @@ namespace QuakeMapGenerator
                     {
                         Info1Text = "遠地地震に関する情報\n\n\n\n" + P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "津波の心配はありません。").Replace("Unknown", "津波は不明です。").Replace("Checking", "津波について調査中です。").Replace("NonEffective", "若干の海面変動 被害の心配なし").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。");
                         Info3Wid.Text = P2PQuake_json[0].Earthquake.Hypocenter.Name;
-                        Info3Text = $"{P2PQuake_json[0].Earthquake.Hypocenter.Name}\nM{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9")}{$"　　{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("　　0km", "　　ごく浅い")}".Replace("M-1.0　　", "").Replace("-1km", "");
+                        Info3Text = $"{P2PQuake_json[0].Earthquake.Hypocenter.Name}\nM{(P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9")}{$"　　{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("　　0km", "　　ごく浅い")}".Replace("M-1.0　　", "(大規模な火山噴火)").Replace("-1km", "");
                     }
                     string Info4Text = P2PQuake_json[0].Earthquake.Time.Remove(16, 3);
 

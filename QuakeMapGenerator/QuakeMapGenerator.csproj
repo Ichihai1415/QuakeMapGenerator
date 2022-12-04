@@ -133,9 +133,6 @@
     <None Include="Resources\JapanMap1_Replace.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Point.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\k0.png" />
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +244,10 @@
     <None Include="Resources\MapShindo13.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\world2.png" />
+    <None Include="Resources\Point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WorldMap.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

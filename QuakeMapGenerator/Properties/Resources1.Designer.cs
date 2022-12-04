@@ -483,9 +483,9 @@ namespace QuakeMapGenerator.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap world {
+        internal static System.Drawing.Bitmap WorldMap {
             get {
-                object obj = ResourceManager.GetObject("world", resourceCulture);
+                object obj = ResourceManager.GetObject("WorldMap", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
