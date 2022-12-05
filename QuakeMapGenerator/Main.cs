@@ -893,6 +893,9 @@ namespace QuakeMapGenerator
                                 Console.WriteLine("一致");
                             }
                         }
+                        if(P2PQuake_json[0].Earthquake.MaxScale >= 30)
+                                FileFlag = true;
+
                         Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "　置換色準備完了");
 
                         int SimageX = (int)((P2PQuake_json[0].Earthquake.Hypocenter.Longitude - 115) * 100) - 25;
