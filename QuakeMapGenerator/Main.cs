@@ -24,6 +24,7 @@ namespace QuakeMapGenerator
         private void Main_Click(object sender, EventArgs e)
         {
         }
+        bool NoFirst = false;
         private void P2P_Tick(object sender, EventArgs e)
         {
             try
@@ -35,7 +36,7 @@ namespace QuakeMapGenerator
                     Encoding = Encoding.UTF8
                 };
                 //通常
-                string P2Pquake_json = wc_P2PQuake.DownloadString("https://api.p2pquake.net/v2/history?codes=551");
+                string P2Pquake_json = wc_P2PQuake.DownloadStringTaskAsync("https://api.p2pquake.net/v2/history?codes=551").Result;
                 //○個前
                 //string P2Pquake_json = wc_P2PQuake.DownloadString("https://api.p2pquake.net/v2/jma/quake?offset=1"); Test.Text = "過去の情報です。";
                 //福島県沖2022(通常)
@@ -391,23 +392,24 @@ namespace QuakeMapGenerator
                             string TweetText = $"震度速報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n{AreaAll}";
                             if (TweetText.Length > 120)
                                 TweetText = TweetText.Remove(120, TweetText.Length - 120) + "…";
-                            try
-                            {
-                                if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                            if (NoFirst)
+                                try
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                    LatestTweetID = status.Id;
+                                    if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                    {
+                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                        LatestTweetID = status.Id;
+                                    }
+                                    else
+                                    {
+                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                        LatestTweetID = status.Id;
+                                    }
                                 }
-                                else
+                                catch
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText });
-                                    LatestTweetID = status.Id;
-                                }
-                            }
-                            catch
-                            {
 
-                            }
+                                }
                             LatestArea = AreaAll;
                             LatestTime = P2PQuake_json[0].Earthquake.Time;
                         }
@@ -670,24 +672,26 @@ namespace QuakeMapGenerator
                                 Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                                 Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                                 string TweetText = $"震源に関する情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                                try
-                                {
-                                    if (LatestTime == P2PQuake_json[0].Earthquake.Time)
-                                    {
-                                        Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                        LatestTweetID = status.Id;
-                                    }
-                                    else
-                                    {
-                                        Status status = tokens.Statuses.Update(new { status = TweetText });
-                                        LatestTweetID = status.Id;
-                                    }
-                                }
-                                catch
-                                {
+                                if (NoFirst)
 
-                                }
-                                
+                                    try
+                                    {
+                                        if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                        {
+                                            Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                            LatestTweetID = status.Id;
+                                        }
+                                        else
+                                        {
+                                            Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                            LatestTweetID = status.Id;
+                                        }
+                                    }
+                                    catch
+                                    {
+
+                                    }
+
                                 LatestTime = P2PQuake_json[0].Earthquake.Time;
                             }
 
@@ -893,8 +897,8 @@ namespace QuakeMapGenerator
                                 Console.WriteLine("一致");
                             }
                         }
-                        if(P2PQuake_json[0].Earthquake.MaxScale >= 30)
-                                FileFlag = true;
+                        if (P2PQuake_json[0].Earthquake.MaxScale >= 30)
+                            FileFlag = true;
 
                         Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + "　置換色準備完了");
 
@@ -949,24 +953,25 @@ namespace QuakeMapGenerator
                             Tokens_JSON Tokens_jsondata = JsonConvert.DeserializeObject<Tokens_JSON>(tokens_json);
                             Tokens tokens = Tokens.Create(Tokens_jsondata.ConsumerKey, Tokens_jsondata.ConsumerSecret, Tokens_jsondata.AccessToken, Tokens_jsondata.AccessSecret);
                             string TweetText = $"各地の震度に関する情報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
-                            try
-                            {
-                                if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                            if (NoFirst)
+                                try
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
-                                    LatestTweetID = status.Id;
+                                    if (LatestTime == P2PQuake_json[0].Earthquake.Time)
+                                    {
+                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                        LatestTweetID = status.Id;
+                                    }
+                                    else
+                                    {
+                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                        LatestTweetID = status.Id;
+                                    }
                                 }
-                                else
+                                catch
                                 {
-                                    Status status = tokens.Statuses.Update(new { status = TweetText });
-                                    LatestTweetID = status.Id;
-                                }
-                            }
-                            catch
-                            {
 
-                            }
-                            
+                                }
+
                             LatestTime = P2PQuake_json[0].Earthquake.Time;
                         }
                     }
@@ -978,8 +983,8 @@ namespace QuakeMapGenerator
                         Bitmap MapImage = new Bitmap(Resources.WorldMap);
                         Graphics Graphics = Graphics.FromImage(MapImage);
 
-                        int LocX = (int)Math.Round((P2PQuake_json[0].Earthquake.Hypocenter.Longitude + 180) * 2.6666666666 + 133,MidpointRounding.AwayFromZero);
-                        int LocY = (int)Math.Round((90 - P2PQuake_json[0].Earthquake.Hypocenter.Latitude) *2.6666666666, MidpointRounding.AwayFromZero);
+                        int LocX = (int)Math.Round((P2PQuake_json[0].Earthquake.Hypocenter.Longitude + 180) * 2.6666666666 + 133, MidpointRounding.AwayFromZero);
+                        int LocY = (int)Math.Round((90 - P2PQuake_json[0].Earthquake.Hypocenter.Latitude) * 2.6666666666, MidpointRounding.AwayFromZero);
                         Graphics.DrawImage(Resources.Point, LocX - 20, LocY - 20, 40, 40);
                         int LocX_ = LocX * -1 + 360;
                         if (LocX_ > 0)
@@ -1010,16 +1015,17 @@ namespace QuakeMapGenerator
                             if (P2PQuake_json[0].Earthquake.Hypocenter.Magnitude == -1)
                             {
                                 TweetText = TweetText.Replace("遠地地震情報", "遠地地震情報(大規模な火山噴火)");
-                                RemoteTalkText= RemoteTalkText.Replace("遠地地震情報", "遠地地震情報、大規模な火山噴火");
+                                RemoteTalkText = RemoteTalkText.Replace("遠地地震情報", "遠地地震情報、大規模な火山噴火");
                             }
-                            try
-                            {
-                                tokens.Statuses.Update(new { status = TweetText });
-                            }
-                            catch
-                            {
+                            if (NoFirst)
+                                try
+                                {
+                                    tokens.Statuses.UpdateAsync(new { status = TweetText });
+                                }
+                                catch
+                                {
 
-                            }
+                                }
                         }
                     }
                     else
@@ -1404,6 +1410,7 @@ namespace QuakeMapGenerator
                     ErrorText = $"{File.ReadAllText($"Log\\ErrorLog\\Main {DateTime.Now:yyyyMMdd}.txt")}\n--------------------------------------------------\nDateTime.Now:HH: mm: ss\n{ex}";
                 File.WriteAllText($"Log\\ErrorLog\\Main {DateTime.Now:yyyyMMdd}.txt", ErrorText);
             }
+            NoFirst = true;
         }
 
         private void NowTime_Tick(object sender, EventArgs e)
