@@ -23,9 +23,10 @@ namespace QuakeMapGenerator
 
         private void Main_Click(object sender, EventArgs e)
         {
+
         }
         bool NoFirst = false;
-        private void P2P_Tick(object sender, EventArgs e)
+        private async void P2P_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace QuakeMapGenerator
                     Encoding = Encoding.UTF8
                 };
                 //通常
-                string P2Pquake_json = wc_P2PQuake.DownloadStringTaskAsync("https://api.p2pquake.net/v2/history?codes=551").Result;
+                string P2Pquake_json = await wc_P2PQuake.DownloadStringTaskAsync("https://api.p2pquake.net/v2/history?codes=551");
                 //○個前
                 //string P2Pquake_json = wc_P2PQuake.DownloadString("https://api.p2pquake.net/v2/jma/quake?offset=1"); Test.Text = "過去の情報です。";
                 //福島県沖2022(通常)
@@ -397,12 +398,12 @@ namespace QuakeMapGenerator
                                 {
                                     if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                                     {
-                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                        Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
                                         LatestTweetID = status.Id;
                                     }
                                     else
                                     {
-                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                        Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                         LatestTweetID = status.Id;
                                     }
                                 }
@@ -678,12 +679,12 @@ namespace QuakeMapGenerator
                                     {
                                         if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                                         {
-                                            Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                            Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
                                             LatestTweetID = status.Id;
                                         }
                                         else
                                         {
-                                            Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                            Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                             LatestTweetID = status.Id;
                                         }
                                     }
@@ -958,12 +959,12 @@ namespace QuakeMapGenerator
                                 {
                                     if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                                     {
-                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID }).Result;
+                                        Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
                                         LatestTweetID = status.Id;
                                     }
                                     else
                                     {
-                                        Status status = tokens.Statuses.UpdateAsync(new { status = TweetText }).Result;
+                                        Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                         LatestTweetID = status.Id;
                                     }
                                 }
@@ -1020,7 +1021,7 @@ namespace QuakeMapGenerator
                             if (NoFirst)
                                 try
                                 {
-                                    tokens.Statuses.UpdateAsync(new { status = TweetText });
+                                    await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                 }
                                 catch
                                 {
