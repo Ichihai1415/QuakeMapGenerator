@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace QuakeMapGenerator
 {
-    public partial class Main : Form
+    public partial class Main : Form//todo:telopに送る
     {
         public Main()
         {
@@ -1516,11 +1516,12 @@ namespace QuakeMapGenerator
         {
             Console.WriteLine($"FileOpen_Tick");
             string[] FilePaths = Directory.GetFiles("File", "*", SearchOption.AllDirectories);
-            for (int i = 0; i < FilePaths.Length; i++)
-            {
-                Process.Start(FilePaths[i]);
-                Console.WriteLine($"{i + 1}　{FilePaths[i]}");
-            }
+            if (NoFirst)
+                for (int i = 0; i < FilePaths.Length; i++)
+                {
+                    Process.Start(FilePaths[i]);
+                    Console.WriteLine($"{i + 1}　{FilePaths[i]}");
+                }
             FileOpen.Enabled = false;
             Console.WriteLine($"stop");
         }
