@@ -1341,7 +1341,17 @@ namespace QuakeMapGenerator
                         Back.Text = "地図データ:気象庁";
 
                     }
+                    if (P2PQuake_json[0].Issue.Type == "ScalePrompt")
+                    {
 
+                        string MainColor = $"{Info3.BackColor.R},{Info3.BackColor.G},{Info3.BackColor.B}";
+                        string SubColor = $"{Info0.BackColor.R},{Info0.BackColor.G},{Info0.BackColor.B}";
+                        string ForeColor = "White";
+                        if (P2PQuake_json[0].Earthquake.MaxScale >= 30 && P2PQuake_json[0].Earthquake.MaxScale <= 50)
+                            ForeColor = "Black";
+                        TelopSocketSend($"0,震度速報【最大震度{MaxInt}】,{AreaTextBox.Text},{SubColor},{ForeColor},{MainColor},{ForeColor},False,60,-100");
+
+                    }
 
 
 
@@ -1413,7 +1423,27 @@ namespace QuakeMapGenerator
             }
             NoFirst = true;
         }
-
+        public void TelopSocketSend(string Text)
+        {
+            IPEndPoint IPEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31401);
+            try
+            {
+                using (TcpClient TcpClient = new TcpClient())
+                {
+                    TcpClient.Connect(IPEndPoint);
+                    using (NetworkStream NetworkStream = TcpClient.GetStream())
+                    {
+                        byte[] Bytes = new byte[4096];
+                        Bytes = Encoding.UTF8.GetBytes(Text);
+                        NetworkStream.Write(Bytes, 0, Bytes.Length);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         private void NowTime_Tick(object sender, EventArgs e)
         {
             NowTime.Text = "現在時刻:" + DateTime.Now.ToString("HH:mm:ss");
