@@ -381,6 +381,7 @@ namespace QuakeMapGenerator
                         AreaTextBox.Text = null;
                         AreaTextBox.Text = AreaAll;
 
+                        /*
                         RemoteTalkText = ("震度速報、" + AreaAll).Replace(" ", "、").Replace("《", "、").Replace("》", "").Replace("\n", "").Replace("、、", "、");
                         DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
                         DateTime NowTime = DateTime.Now;
@@ -422,7 +423,7 @@ namespace QuakeMapGenerator
                                 TweetText = TweetText.Remove(120, TweetText.Length - 120) + "…";
                                 Console.WriteLine(TweetText);
                             }
-                        }
+                        }*/
                     }//震度速報終了
                     else if (P2PQuake_json[0].Issue.Type == "Destination")
                     {
@@ -1341,6 +1342,7 @@ namespace QuakeMapGenerator
                         Back.Text = "地図データ:気象庁";
 
                     }
+                    /*
                     if (P2PQuake_json[0].Issue.Type == "ScalePrompt")
                     {
 
@@ -1351,7 +1353,7 @@ namespace QuakeMapGenerator
                             ForeColor = "Black";
                         TelopSocketSend($"0,震度速報【最大震度{MaxInt}】,{AreaTextBox.Text},{SubColor},{ForeColor},{MainColor},{ForeColor},False,60,-100");
 
-                    }
+                    }*/
 
 
 
