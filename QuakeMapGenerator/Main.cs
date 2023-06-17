@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace QuakeMapGenerator
 {
-    public partial class Main : Form//todo:telopに送る
+    public partial class Main : Form
     {
         public Main()
         {
@@ -942,7 +942,7 @@ namespace QuakeMapGenerator
                             MaxInt = "6強";
                         else if (P2PQuake_json[0].Earthquake.MaxScale == 70)
                             MaxInt = "7";
-                        if (FileFlag == true)
+                        if (FileFlag == true && NoFirst)
                             FileOpen.Enabled = true;
                         RemoteTalkText = ($"地震情報。最大震度{MaxInt}、震源、{P2PQuake_json[0].Earthquake.Hypocenter.Name}、マグニチュード{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))}、{$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}キロメートル。".Replace("深さ0キロメートル", "深さごく浅い")}{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}");
                         DateTime InfoTime = Convert.ToDateTime(P2PQuake_json[0].Time);
@@ -1361,6 +1361,8 @@ namespace QuakeMapGenerator
                     if (Settings.Default.IsRemoteTalk)
                     {
                         string sMessage = RemoteTalkText;
+                        if (NoFirst)
+                            sMessage = "起動しました";
                         byte bCode = 0;
                         Int16 iVoice = 2;
                         Int16 iVolume = 100;
