@@ -676,7 +676,7 @@ namespace QuakeMapGenerator
                                 string TweetText = $"震源に関する情報  {P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
                                 if (NoFirst)
                                     try
-                                    {
+                                    {/*
                                         if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                                         {
                                             Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
@@ -686,7 +686,7 @@ namespace QuakeMapGenerator
                                         {
                                             Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                             LatestTweetID = status.Id;
-                                        }
+                                        }*/
                                     }
                                     catch
                                     {
@@ -956,7 +956,7 @@ namespace QuakeMapGenerator
                             string TweetText = $"各地の震度に関する情報【最大震度{MaxInt}】{P2PQuake_json[0].Earthquake.Time.Remove(16, 3)}\n震源:{P2PQuake_json[0].Earthquake.Hypocenter.Name}  M{((P2PQuake_json[0].Earthquake.Hypocenter.Magnitude + ".0").Replace(".1.0", ".1").Replace(".2.0", ".2").Replace(".3.0", ".3").Replace(".4.0", ".4").Replace(".5.0", ".5").Replace(".6.0", ".6").Replace(".7.0", ".7").Replace(".8.0", ".8").Replace(".9.0", ".9"))} {$"深さ{P2PQuake_json[0].Earthquake.Hypocenter.Depth}km".Replace("深さ0km", "深さごく浅い")}\n{P2PQuake_json[0].Earthquake.DomesticTsunami.Replace("None", "この地震による津波の心配はありません。").Replace("Unknown", "この地震による津波は不明です。").Replace("Checking", "現在津波について調査中です。").Replace("NonEffective", "若干の海面変動があるかもしれませんが、被害の心配はありません。").Replace("Watch", "津波注意報発表中です。").Replace("Warning", "津波情報発表中です。")}";
                             if (NoFirst)
                                 try
-                                {
+                                {/*
                                     if (LatestTime == P2PQuake_json[0].Earthquake.Time)
                                     {
                                         Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText, in_reply_to_status_id = LatestTweetID });
@@ -966,7 +966,7 @@ namespace QuakeMapGenerator
                                     {
                                         Status status = await tokens.Statuses.UpdateAsync(new { status = TweetText });
                                         LatestTweetID = status.Id;
-                                    }
+                                    }*/
                                 }
                                 catch
                                 {
@@ -1017,16 +1017,16 @@ namespace QuakeMapGenerator
                             {
                                 TweetText = TweetText.Replace("遠地地震情報", "遠地地震情報(大規模な火山噴火)");
                                 RemoteTalkText = RemoteTalkText.Replace("遠地地震情報", "遠地地震情報、大規模な火山噴火");
-                            }
+                            }/*
                             if (NoFirst)
                                 try
                                 {
                                     await tokens.Statuses.UpdateAsync(new { status = TweetText });
-                                }
+                                }*
                                 catch
                                 {
 
-                                }
+                                }*/
                         }
                     }
                     else
@@ -1547,16 +1547,23 @@ namespace QuakeMapGenerator
 
         private void FileOpen_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine($"FileOpen_Tick");
-            string[] FilePaths = Directory.GetFiles("File", "*", SearchOption.AllDirectories);
-            if (NoFirst)
-                for (int i = 0; i < FilePaths.Length; i++)
-                {
-                    Process.Start(FilePaths[i]);
-                    Console.WriteLine($"{i + 1}　{FilePaths[i]}");
-                }
-            FileOpen.Enabled = false;
-            Console.WriteLine($"stop");
+            try
+            {
+                Console.WriteLine($"FileOpen_Tick");
+                string[] FilePaths = Directory.GetFiles("File", "*", SearchOption.AllDirectories);
+                if (NoFirst)
+                    for (int i = 0; i < FilePaths.Length; i++)
+                    {
+                        Process.Start(FilePaths[i]);
+                        Console.WriteLine($"{i + 1}　{FilePaths[i]}");
+                    }
+                FileOpen.Enabled = false;
+                Console.WriteLine($"stop");
+            }
+            catch
+            {
+
+            }
         }
 
         private void Zoom25UP_Click(object sender, EventArgs e)
